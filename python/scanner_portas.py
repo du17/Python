@@ -4,7 +4,7 @@ from datetime import datetime
 
 # Limpa a tela
 print("-" * 50)
-print("Scanner de Portas Simples")
+print("Scanner de Portas-Projeto")
 print("-" * 50)
 
 # Solicita entrada
