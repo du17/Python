@@ -1,0 +1,7 @@
+https://www.ev.org.br/cursos/criando-um-projeto-com-interface-grafica-utilizando-a-linguagem-python
+
+https://www.datacamp.com/pt/tutorial/nicegui
+
+https://www.tabnews.com.br/csant/pywebview-como-criar-uma-aplicacao-desktop-usando-html-css-javascript-e-python
+
+https://labex.io/pt/tutorials/python-building-a-network-scanner-in-python-298855
