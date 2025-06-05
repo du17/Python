@@ -5,3 +5,14 @@ https://www.datacamp.com/pt/tutorial/nicegui
 https://www.tabnews.com.br/csant/pywebview-como-criar-uma-aplicacao-desktop-usando-html-css-javascript-e-python
 
 https://labex.io/pt/tutorials/python-building-a-network-scanner-in-python-298855
+
+https://github.com/Paulinhx/Python-Nmap-Scanner/blob/main/python-nmap%20.py
+
+https://github.com/himadriganguly/nmap-python-scanner/blob/master/nmap_portscanner.py
+
+https://xael.org/pages/python-nmap-en.html
+
+https://github.com/dievus/threader3000/blob/master/threader3000.py
+
+https://github.com/nmmapper/python3-nmap/tree/main/nmap3
+
