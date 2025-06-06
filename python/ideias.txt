@@ -16,3 +16,10 @@ https://github.com/dievus/threader3000/blob/master/threader3000.py
 
 https://github.com/nmmapper/python3-nmap/tree/main/nmap3
 
+https://github.com/PeterMosmans/security-scripts/tree/master
+
+https://github.com/mayurkadampro/NMAP-Port-Scanner/tree/master
+
+https://github.com/Akshay7591/Web-Scanner
+
+https://github.com/blythest/psst_hb_final_project/tree/master
