@@ -27,3 +27,9 @@ https://github.com/blythest/psst_hb_final_project/tree/master
 https://code.visualstudio.com/docs/python/tutorial-flask
 
 https://www.google.com/search?q=como+instalar+o+flask+do+python+local+vs+code&sca_esv=b9039e3016f1e9d6&ei=eldLaI-EFrrW5OUP8oHLyA0&ved=0ahUKEwiPqbv8-eyNAxU6K7kGHfLAEtkQ4dUDCBI&uact=5&oq=como+instalar+o+flask+do+python+local+vs+code&gs_lp=Egxnd3Mtd2l6LXNlcnAiLWNvbW8gaW5zdGFsYXIgbyBmbGFzayBkbyBweXRob24gbG9jYWwgdnMgY29kZTIFECEYnwVInQdQ4wVY4wVwAXgBkAEAmAGVAaABlQGqAQMwLjG4AQPIAQD4AQGYAgKgAqQBwgIKEAAYsAMY1gQYR5gDAIgGAZAGCJIHAzEuMaAHhQOyBwMwLjG4B58BwgcDMi0yyAcH&sclient=gws-wiz-serp
+
+https://medium.com/@habbema/threads-em-python-9a3a7b3c776d
+
+https://realpython.com/intro-to-python-threading/
+
+https://www.dio.me/articles/executando-tarefas-simultaneas-em-python-com-a-biblioteca-threading
