@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanner de Portas Simples</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .porta-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .porta-group input {
+            flex: 1;
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: #667eea;
+        }
+        
+        .resultado {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .sucesso {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .erro {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .portas-lista {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .porta-item {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            margin: 2px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .dica {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Scanner de Portas</h1>
+        
+        <form id="scanForm">
+            <div class="form-group">
+                <label for="host">Host/IP para escanear:</label>
+                <input type="text" id="host" name="host" placeholder="Ex: google.com ou 192.168.1.1" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Range de Portas:</label>
+                <div class="porta-group">
+                    <input type="number" id="porta_inicial" name="porta_inicial" placeholder="De" min="1" max="65535" value="1" required>
+                    <input type="number" id="porta_final" name="porta_final" placeholder="Até" min="1" max="65535" value="100" required>
+                </div>
+            </div>
+            
+            <button type="submit" id="scanBtn">Iniciar Scan</button>
+        </form>
+        
+        <div class="loading" id="loading">
+            <p>🔄 Escaneando portas... Aguarde!</p>
+        </div>
+        
+        <div class="resultado" id="resultado"></div>
+        
+        <div class="dica">
+            <strong>💡 Dicas:</strong><br>
+            • Teste com google.com (portas 1-100)<br>
+            • Portas comuns: 21, 22, 23, 25, 53, 80, 110, 443<br>
+            • Ranges pequenos são mais rápidos<br>
+            • Use apenas em redes próprias!
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('scanForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const scanBtn = document.getElementById('scanBtn');
+            const loading = document.getElementById('loading');
+            const resultado = document.getElementById('resultado');
+            
+            // Mostra loading
+            scanBtn.disabled = true;
+            scanBtn.textContent = 'Escaneando...';
+            loading.style.display = 'block';
+            resultado.style.display = 'none';
+            
+            // Faz a requisição
+            fetch('/scan', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = 'none';
+                resultado.style.display = 'block';
+                
+                if (data.sucesso) {
+                    resultado.className = 'resultado sucesso';
+                    
+                    let html = `
+                        <h3>✅ Scan Concluído!</h3>
+                        <p><strong>Host:</strong> ${data.host}</p>
+                        <p><strong>Portas abertas:</strong> ${data.total_portas}</p>
+                        <p><strong>Tempo:</strong> ${data.tempo}</p>
+                    `;
+                    
+                    if (data.portas_abertas.length > 0) {
+                        html += '<div class="portas-lista">';
+                        data.portas_abertas.forEach(porta => {
+                            html += `<span class="porta-item">${porta}</span>`;
+                        });
+                        html += '</div>';
+                    } else {
+                        html += '<p><em>Nenhuma porta aberta encontrada no range especificado.</em></p>';
+                    }
+                    
+                    resultado.innerHTML = html;
+                } else {
+                    resultado.className = 'resultado erro';
+                    resultado.innerHTML = `<h3>❌ Erro</h3><p>${data.erro}</p>`;
+                }
+            })
+            .catch(error => {
+                loading.style.display = 'none';
+                resultado.style.display = 'block';
+                resultado.className = 'resultado erro';
+                resultado.innerHTML = `<h3>❌ Erro</h3><p>Erro de conexão: ${error.message}</p>`;
+            })
+            .finally(() => {
+                scanBtn.disabled = false;
+                scanBtn.textContent = 'Iniciar Scan';
+            });
+        });
+    </script>
+</body>
+</html>
